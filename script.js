@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 'use strict';
 //console.log('script.js being connected');
 //user can choose 1-50 img,  print results to console
@@ -9,9 +10,8 @@
 const getDog = function() {
   //console.log('https://dog.ceo/api.breeds/image/random/' + $('.numCheck').val());
   let breed = $('.breedCheck').val();
-  //console.log(`https://dog.ceo/api/breed/${breed}/images/random/`);
-  fetch(`https://dog.ceo/api/breed/${breed}/images/random/`)
-  //console.log(`https://dog.ceo/api/breed/${breed}/images/random/`)
+  console.log(`'this is a test'https://dog.ceo/api/breed/${breed}/images/random`);
+  fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
     .then(response => response.json())
     .then(jsonData => {
       displayDog(jsonData);
@@ -21,37 +21,30 @@ const getDog = function() {
     });
 };
 
-function numberPolice() {
-  let check = $('.breedCheck').val();
-  if (check < 1 || check > 50) {
-    alert('Please choose a number between 1 and 50');
-    // Prevent page from rendering
-  } else {
-    getDog();
-  } 
-}
-
 function handleNewSubmit() {
   $('.form-submission').submit(function(event){
     event.preventDefault();
-    numberPolice();
-    //getDog();
+    //numberPolice();
+    getDog();
   });
 }
 
 const displayDog = function(jsonData) {
   let dogArray = jsonData.message;
-  dogArray.forEach(function(element) {
-    createImg(element);
-  });
+  console.log(dogArray);
+  if (dogArray === 'Breed not found'){
+    alert('Breed not found, please choose another.');  
+  } else {
+    createImg(dogArray);
+  }
 };
 
 /**
  * create img grid
  */
-const createImg = function(element) {
+const createImg = function(dogArray) {
   $('.dogImg').append(
-    `<img src="${element}" alt="Smiley face" height="175" width="175">`
+    `<img src="${dogArray}" alt="Smiley face" height="175" width="175">`
   );
 };
 
