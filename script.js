@@ -8,7 +8,10 @@
 */
 const getDog = function() {
   //console.log('https://dog.ceo/api.breeds/image/random/' + $('.numCheck').val());
-  fetch('https://dog.ceo/api/breeds/image/random/' + $('.numCheck').val())
+  let breed = $('.breedCheck').val();
+  //console.log(`https://dog.ceo/api/breed/${breed}/images/random/`);
+  fetch(`https://dog.ceo/api/breed/${breed}/images/random/`)
+  //console.log(`https://dog.ceo/api/breed/${breed}/images/random/`)
     .then(response => response.json())
     .then(jsonData => {
       displayDog(jsonData);
@@ -19,8 +22,7 @@ const getDog = function() {
 };
 
 function numberPolice() {
-  //console.log($('.numCheck').val());
-  let check = $('.numCheck').val();
+  let check = $('.breedCheck').val();
   if (check < 1 || check > 50) {
     alert('Please choose a number between 1 and 50');
     // Prevent page from rendering
@@ -30,7 +32,6 @@ function numberPolice() {
 }
 
 function handleNewSubmit() {
-  //console.log('handled new submit');
   $('.form-submission').submit(function(event){
     event.preventDefault();
     numberPolice();
@@ -39,7 +40,6 @@ function handleNewSubmit() {
 }
 
 const displayDog = function(jsonData) {
-  //console.log(jsonData.message);
   let dogArray = jsonData.message;
   dogArray.forEach(function(element) {
     createImg(element);
