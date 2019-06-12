@@ -43,6 +43,7 @@ const displayDog = function(jsonData) {
  * create img grid
  */
 const createImg = function(dogArray) {
+  $('.dogImg').empty();
   $('.dogImg').append(
     `<img src="${dogArray}" alt="Smiley face" height="175" width="175">`
   );
